@@ -71,20 +71,17 @@ class TurtleController(object):
 
                 if self.gripper_closed:
                     # open
-                    print
-                    "open gripper"
+                    print "open gripper"
                     gripper_position[0] = 0.01
                     gripper_message.data = gripper_position
                     self.gripper_pub.publish(gripper_message)
                 else:
-                    print
-                    "close gripper"
+                    print "close gripper"
                     gripper_position[0] = -0.01
                     gripper_message.data = gripper_position
                     self.gripper_pub.publish(gripper_message)
 
-                print
-                "sleep grip"
+                print "sleep grip"
                 time.sleep(0.5)
         else:
             self.gripper_closed = False
@@ -134,8 +131,7 @@ class TurtleController(object):
 
     def joystick_callback(self, joystick):
         if not joystick.buttons or not joystick.axes:
-            print
-            "no input"
+            print "no input"
             return
 
         # check if controller is non-default and update changed values
@@ -146,37 +142,29 @@ class TurtleController(object):
     def move_ik(self, xyz):
         move_group = self.arm_group
 
-        tilt_constraint = OrientationConstraint()
-        # The link that must be oriented upwards
-        tilt_constraint.link_name = "end_effector_link"
-        # 'base_link' is equal to the world link
-        tilt_constraint.header.frame_id = "link1"
+        fixed_end_effector = OrientationConstraint()
+        fixed_end_effector.link_name = "end_effector_link"
+        fixed_end_effector.header.frame_id = "link1"
+        fixed_end_effector.orientation.w = 1.0
 
-        tilt_constraint.orientation.w = 1.0
-        # Allow rotation of 45 degrees around the x and y axis
-        tilt_constraint.absolute_x_axis_tolerance = 0.1  # Allow max rotation of 45 degrees
-        tilt_constraint.absolute_y_axis_tolerance = 0.1  # Allow max rotation of 360 degrees
-        tilt_constraint.absolute_z_axis_tolerance = 3.14  # Allow max rotation of 45 degrees
-        # The tilt constraint is the only constraint
-        tilt_constraint.weight = 1.0
+        fixed_end_effector.absolute_x_axis_tolerance = 0.1
+        fixed_end_effector.absolute_y_axis_tolerance = 0.1
+        fixed_end_effector.absolute_z_axis_tolerance = 3.14
+
+        fixed_end_effector.weight = 1.0
 
         constraint = Constraints()
         constraint.name = "tilt constraint"
-        constraint.orientation_constraints = [tilt_constraint]
-        print
-        "move seting stuff"
+        constraint.orientation_constraints = [fixed_end_effector]
+
         move_group.set_path_constraints(constraint)
 
         move_group.set_position_target(xyz)
-        print
-        "move set stuff done"
+
         try:
             move_group.go(wait=True)
-            print
-            "move go"
         except MoveItCommanderException:
-            print
-            "sorry cant move here!"
+            print "sorry cant move here!"
         # move_group.stop()
         self.moving = False
 
@@ -185,8 +173,7 @@ class TurtleController(object):
         try:
             move_group.go(list(joints), wait=True)
         except MoveItCommanderException:
-            print
-            "sorry cant move here!"
+            print "sorry cant move here!"
         move_group.clear_pose_targets()
         move_group.stop()
         self.moving = False
@@ -214,8 +201,7 @@ class TurtleController(object):
         try:
             move_group.go([0, -1, 0.319, 0.71], wait=True)
         except MoveItCommanderException:
-            print
-            "sorry cant move here!"
+            print "sorry cant move here!"
         move_group.stop()
         self.x_pos = 0.05
         self.y_pos = 0
@@ -226,11 +212,9 @@ class TurtleController(object):
         # give time for nodes to initialise
         time.sleep(3)
 
-        print
-        "Turtle home posistion"
+        print "Turtle home posistion"
         time.sleep(1)
-        print
-        "Turtle ready!"
+        print "Turtle ready!"
         while not rospy.is_shutdown():
 
             self.turtle_drive()
