@@ -76,25 +76,15 @@ setup controller
 ```
 sudo xboxdrv --silent
 ```
-if you get LIBUSB_ERROR_BUSY error 
-run then try step 5 again.
+>if you get LIBUSB_ERROR_BUSY error then run 
 ```
 sudo rmmod xpad
 ```
+>then try step 5 again.
 
-setup joy node parameters
-```
-rosparam set joy_node/deadzone "0.05"
 
-rosparam set joy_node/autorepeat_rate "4.0"
+6.
+conturtle
 ```
-
-start joy node // TODO dev/
-```
-rosrun joy joy_node
-```
-
-and finaly start conturtl
-```
-rosrun conturlter.py
+ roslaunch conturtle conturtle.launch
 ```
