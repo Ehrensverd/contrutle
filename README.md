@@ -8,15 +8,19 @@ These instructions will get you a copy of the project up and running on your loc
 
 ### Prerequisites
 
-Linux, Turtlebot or Gazeebo.
-move it
+Linux Ubuntu 16.04 or 18.04.
+A Turtlebot or Gazebo.
+Ros kinetic or melodic
 
+python 2.7
 
 ### Installing
-TODO
-python 2.7
+
+
 ros kinetic
-turtlebot3 manipulator
+### turtlebot3 manipulator
+Follow insturctions [here](https://emanual.robotis.com/docs/en/platform/turtlebot3/pc_setup/) and [here](
+https://emanual.robotis.com/docs/en/platform/turtlebot3/manipulation/#software-setup):
 
 ros kinetic
 ```
