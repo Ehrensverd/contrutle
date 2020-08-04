@@ -4,52 +4,42 @@ Inverse kinematics interface between console controller and turtlebot3 manipulat
 
 ## Getting Started
 
-These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See deployment for notes on how to deploy the project on a live system.
+These instructions will get you a copy of the project up and running on your local machine for development. See deployment for notes on how to deploy the project on a live system.
 
-### Prerequisites
+## Prerequisites
 
 Linux Ubuntu 16.04 or 18.04.
-A Turtlebot or Gazebo.
+A Turtlebot3 waffle with a manipulator or Gazebo.
+> conturtle can be run on live turtlebot3 or one simulated in gazebo
 Ros kinetic or melodic
-
 python 2.7
 
-### Installing
+
+## Setup
 
 
-ros kinetic
-### turtlebot3 manipulator
+
+### turtlebot3 and manipulator
 Follow insturctions [here](https://emanual.robotis.com/docs/en/platform/turtlebot3/pc_setup/) and [here](
 https://emanual.robotis.com/docs/en/platform/turtlebot3/manipulation/#software-setup):
 
-ros kinetic
+### python modules
+rospy and liberies
 ```
-$ sudo apt-get update
-$ sudo apt-get upgrade
-$ wget https://raw.githubusercontent.com/ROBOTIS-GIT/robotis_tools/master/install_ros_kinetic.sh && chmod 755 ./install_ros_kinetic.sh && bash ./install_ros_kinetic.sh
+pip install roslibpy
 ```
-turtlebot3 setup
+
 ```
-sudo apt-get install ros-kinetic-joy ros-kinetic-teleop-twist-joy ros-kinetic-teleop-twist-keyboard ros-kinetic-laser-proc ros-kinetic-rgbd-launch ros-kinetic-depthimage-to-laserscan ros-kinetic-rosserial-arduino ros-kinetic-rosserial-python ros-kinetic-rosserial-server ros-kinetic-rosserial-client ros-kinetic-rosserial-msgs ros-kinetic-amcl ros-kinetic-map-server ros-kinetic-move-base ros-kinetic-urdf ros-kinetic-xacro ros-kinetic-compressed-image-transport ros-kinetic-rqt-image-view ros-kinetic-gmapping ros-kinetic-navigation ros-kinetic-interactive-markers
+pip install  moveit_commander
 ```
+
+### Installing
 
 ```
 $ cd ~/catkin_ws/src/
-$ git clone https://github.com/ROBOTIS-GIT/turtlebot3_msgs.git
-$ git clone -b kinetic-devel https://github.com/ROBOTIS-GIT/turtlebot3.git
+$ git clone https://github.com/Ehrensverd/contrutle
 $ cd ~/catkin_ws && catkin_make
 ```
-
-manipulator
-```
-$ cd ~/catkin_ws/src/
-$ git clone https://github.com/ROBOTIS-GIT/turtlebot3_manipulation.git
-$ git clone https://github.com/ROBOTIS-GIT/turtlebot3_manipulation_simulations.git
-$ cd ~/catkin_ws && catkin_make
-```
-
-
-
 
 
 ## Deployment
